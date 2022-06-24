@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { createStyles, Header, Group, ActionIcon, Container, Burger, Image } from '@mantine/core';
-import { useBooleanToggle } from '@mantine/hooks';
-import { BrandTwitter, BrandYoutube, BrandInstagram } from 'tabler-icons-react';
+import { createStyles, Header, Group, ActionIcon, Container, Image, Text, List, ThemeIcon, Button, Anchor } from '@mantine/core';
+import { Link } from '@remix-run/react';
+import { useCallback, useEffect, useState } from 'react';
+import { BrandTwitter, BrandDiscord, Check } from 'tabler-icons-react';
 import Logo from '../media/logo.png';
 
 const useStyles = createStyles((theme) => ({
@@ -16,14 +16,6 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  links: {
-    width: 260,
-
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
-    },
-  },
-
   social: {
     width: 260,
 
@@ -33,94 +25,127 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  burger: {
-    marginRight: theme.spacing.md,
+  outer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: '20vh',
 
-    [theme.fn.largerThan('sm')]: {
-      display: 'none',
+    [theme.fn.smallerThan('sm')]: {
+      justifyContent: 'flex-start',
     },
   },
 
-  link: {
-    display: 'block',
-    lineHeight: 1,
-    padding: '8px 12px',
-    borderRadius: theme.radius.sm,
-    textDecoration: 'none',
-    color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
-    fontSize: theme.fontSizes.sm,
-    fontWeight: 500,
+  landingText: {
+    fontSize: '4.5rem',
+    lineHeight: '2rem',
+    fontWeight: 700,
+    paddingBottom: 32,
 
+    [theme.fn.smallerThan('sm')]: {
+      fontSize: '0.875rem',
+      lineHeight: '1.5rem',
+      paddingBottom: 0,
+    },
+
+    [theme.fn.smallerThan('md')]: {
+      fontSize: '0.25rem',
+      lineHeight: '1.5rem',
+      paddingBottom: 0,
+    },
+
+    [theme.fn.smallerThan('lg')]: {
+      fontSize: '0.25rem',
+      lineHeight: '1.5rem',
+      paddingBottom: 0,
+    },
+
+    [theme.fn.smallerThan('xl')]: {
+      fontSize: '1.5rem',
+      lineHeight: '1.5rem',
+      paddingBottom: 0,
+    },
+  },
+
+  startButton: {
+    width: '70%',
+    backgroundColor: '#F09821',
     '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+      backgroundColor: '#F09821',
+      opacity: 0.8
+    },
+
+    [theme.fn.smallerThan('sm')]: {
+      width: '100%',
     },
   },
 
-  linkActive: {
-    '&, &:hover': {
-      backgroundColor:
-        theme.colorScheme === 'dark'
-          ? theme.fn.rgba(theme.colors[theme.primaryColor][9], 0.25)
-          : theme.colors[theme.primaryColor][0],
-      color: theme.colors[theme.primaryColor][theme.colorScheme === 'dark' ? 3 : 7],
-    },
-  },
+  linkText: {
+    color: '#F09821'
+  }
 }));
 
-interface HeaderMiddleProps {
-  links: { link: string; label: string }[];
-}
-
-const links = [
-  { "link": "/about", "label": "Home" },
-  { "link": "/learn", "label": "Features" },
-  { "link": "/pricing", "label": "Pricing" }
+const SWITCHABLE_TEXT = [
+  'license your software',
+  'authenticate customers',
+  'load remote DLLs',
+  'improve security',
+  'make life easier'
 ]
 
 const Index = () => {
-  const [opened, toggleOpened] = useBooleanToggle(false);
-  const [active, setActive] = useState(links[0].link);
-  const { classes, cx } = useStyles();
+  const { classes } = useStyles();
 
-  const items = links.map((link) => (
-    <a
-      key={link.label}
-      href={link.link}
-      className={cx(classes.link, { [classes.linkActive]: active === link.link })}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-      }}
-    >
-      {link.label}
-    </a>
-  ));
+  const [textIndex, setTextIndex] = useState(0);
+
+  const shuffle = useCallback(() => {
+    const index = Math.floor(Math.random() * SWITCHABLE_TEXT.length);
+    setTextIndex(index);
+  }, []);
+
+  useEffect(() => {
+    const intervalID = setInterval(shuffle, 3000);
+    return () => clearInterval(intervalID);
+  }, [shuffle])
 
   return (
-    <Header height={56} mb={120}>
+    <Header height={56} mb={120} sx={{ borderBottom: 0 }} >
       <Container className={classes.inner}>
-        <Burger
-          opened={opened}
-          onClick={() => toggleOpened()}
-          size="sm"
-          className={classes.burger}
-        />
-        <Group className={classes.links} spacing={5}>
-          {items}
+        <Group>
+          <Image src={Logo} height={48} />
+          <Text weight={700} size="xl">Orbium</Text>
         </Group>
 
-        <Image src={Logo} height={48} />
+        <Group spacing={8} className={classes.social} position="right" noWrap>
+          { /* @ts-expect-error */}
+          <ActionIcon size="lg" component={Anchor} href='https://twitter.com/theravengrey' target="_blank">
+            <BrandTwitter size={24} />
+          </ActionIcon>
+          { /* @ts-expect-error */}
+          <ActionIcon size="lg" component={Anchor} href='https://twitter.com/thegreyraven' target="_blank">
+            <BrandDiscord size={24} />
+          </ActionIcon>
+        </Group>
+      </Container>
 
-        <Group spacing={0} className={classes.social} position="right" noWrap>
-          <ActionIcon size="lg">
-            <BrandTwitter size={18} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <BrandYoutube size={18} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <BrandInstagram size={18} />
-          </ActionIcon>
+      <Container className={classes.outer}>
+        <Group direction='column' sx={{ minWidth: '100%' }}>
+          <Text className={classes.landingText}>A better way to</Text>
+          <Text sx={{ color: "white" }} className={classes.landingText}>{SWITCHABLE_TEXT[textIndex]}</Text>
+          <Text sx={{ color: "white" }} className={classes.landingText}>using <span style={{ color: "#F09821" }}>Orbium</span></Text>
+          <List spacing="sm" pt={12} icon={
+            <ThemeIcon size={24} radius="xl" sx={{ backgroundColor: "#F09821" }}>
+              <Check size={16} />
+            </ThemeIcon>
+          }>
+            <List.Item>Monitor everything from online customers, logins and more.</List.Item>
+            <List.Item>End-to-end security through the SDK and APIs both in transit and at rest.</List.Item>
+            <List.Item>Easily upload and store files required by your software.</List.Item>
+            <List.Item>Write and publish news in realtime to your clients.</List.Item>
+          </List>
+
+          <Button mt={12} size='xl' radius={0} className={classes.startButton} component={Link} to='/authenticate/'>GET STARTED</Button>
+          <Text weight={500}>By joining, you agree with our <span className={classes.linkText}>Terms of Service</span></Text>
         </Group>
       </Container>
     </Header>
