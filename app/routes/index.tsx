@@ -1,7 +1,8 @@
 import { createStyles, Header, Group, ActionIcon, Container, Image, Text, List, ThemeIcon, Button, Anchor } from '@mantine/core';
 import { Link } from '@remix-run/react';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrandTwitter, BrandDiscord, Check } from 'tabler-icons-react';
+import { TextLoop } from "react-text-loop-next";
 import Logo from '../media/logo.png';
 
 const useStyles = createStyles((theme) => ({
@@ -96,17 +97,15 @@ const SWITCHABLE_TEXT = [
 const Index = () => {
   const { classes } = useStyles();
 
-  const [textIndex, setTextIndex] = useState(0);
-
-  const shuffle = useCallback(() => {
-    const index = Math.floor(Math.random() * SWITCHABLE_TEXT.length);
-    setTextIndex(index);
-  }, []);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const intervalID = setInterval(shuffle, 3000);
-    return () => clearInterval(intervalID);
-  }, [shuffle])
+    const intervalId = setInterval(() =>
+      setIndex(index => index + 1),
+      3000 // every 3 seconds
+    );
+    return () => clearTimeout(intervalId);
+  }, []);
 
   return (
     <Header height={56} mb={120} sx={{ borderBottom: 0 }} >
@@ -131,7 +130,11 @@ const Index = () => {
       <Container className={classes.outer}>
         <Group direction='column' sx={{ minWidth: '100%' }}>
           <Text className={classes.landingText}>A better way to</Text>
-          <Text sx={{ color: "white" }} className={classes.landingText}>{SWITCHABLE_TEXT[textIndex]}</Text>
+          <TextLoop>
+            {SWITCHABLE_TEXT.map((text, index) => (
+              <Text key={index} sx={{ color: "white" }} className={classes.landingText}>{text}</Text>
+            ))}
+          </TextLoop>
           <Text sx={{ color: "white" }} className={classes.landingText}>using <span style={{ color: "#F09821" }}>Orbium</span></Text>
           <List spacing="sm" pt={12} icon={
             <ThemeIcon size={24} radius="xl" sx={{ backgroundColor: "#F09821" }}>
