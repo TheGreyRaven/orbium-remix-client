@@ -25,26 +25,8 @@ const useStyles = createStyles((theme) => ({
     paddingBottom: 32,
     color: 'white',
 
-    [theme.fn.smallerThan('sm')]: {
-      fontSize: '0.875rem',
-      lineHeight: '1.5rem',
-      paddingBottom: 0,
-    },
-
-    [theme.fn.smallerThan('md')]: {
-      fontSize: '0.25rem',
-      lineHeight: '1.5rem',
-      paddingBottom: 0,
-    },
-
-    [theme.fn.smallerThan('lg')]: {
-      fontSize: '0.25rem',
-      lineHeight: '1.5rem',
-      paddingBottom: 0,
-    },
-
     [theme.fn.smallerThan('xl')]: {
-      fontSize: '1.5rem',
+      fontSize: '2rem',
       lineHeight: '1.5rem',
       paddingBottom: 0,
     },
