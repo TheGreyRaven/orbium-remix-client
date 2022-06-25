@@ -14,7 +14,7 @@ const useStyles = createStyles(() => ({
     },
     '&:hover': {
       textDecoration: 'none',
-      opacity: 0.8
+      color: '#c27c1c'
     },
 	},
 }));
