@@ -12,34 +12,10 @@ const useStyles = createStyles((theme) => ({
   titleText: {
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 900
-  },
-
-  button: {
-    backgroundColor: '#F09821',
-    '&:hover': {
-      backgroundColor: '#c27c1c',
-    },
-  },
-
-  linkText: {
-		color: "#F09821",
-    '&:link': {
-      textDecoration: 'none'
-    },
-    '&:visited': {
-      textDecoration: 'none'
-    },
-    '&:active': {
-      textDecoration: 'none'
-    },
-    '&:hover': {
-      textDecoration: 'none',
-      color: '#c27c1c'
-    },
-	},
+  }
 }))
 
-const Index = () => {
+const CreateAccount = () => {
   const { classes } = useStyles();
   return (
     <>
@@ -53,21 +29,21 @@ const Index = () => {
         </Title>
         <Text color="dimmed" size="sm" align="center" mt={5}>
           Do not have an account yet?{' '}
-          <Anchor component={Link} to="#" size="sm" className={classes.linkText}>
+          <Anchor component={Link} to="./create-account" size="sm">
             Create account
           </Anchor>
         </Text>
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput label="Email" placeholder="email@orbium.xyz" required />
+          <TextInput label="Email" placeholder="you@mantine.dev" required />
           <PasswordInput label="Password" placeholder="Your password" required mt="md" />
           <Group position="apart" mt="md">
             <Checkbox label="Remember me" />
-            <Anchor component={Link} to="./forgot" size="sm" className={classes.linkText}>
+            <Anchor component={Link} to="./forgot-password" size="sm">
               Forgot password?
             </Anchor>
           </Group>
-          <Button fullWidth mt="xl" className={classes.button}>
+          <Button fullWidth mt="xl">
             Sign in
           </Button>
         </Paper>
@@ -76,4 +52,4 @@ const Index = () => {
   )
 }
 
-export default Index;
+export default CreateAccount;
