@@ -1,9 +1,9 @@
-import { createStyles, Header, Group, ActionIcon, Container, Image, Text, List, ThemeIcon, Button, Anchor } from '@mantine/core';
+import { createStyles, Header, Group, Container, Image, Text, List, ThemeIcon, Button } from '@mantine/core';
 import { Link } from '@remix-run/react';
-import { useEffect, useState } from 'react';
 import { BrandTwitter, BrandDiscord, Check } from 'tabler-icons-react';
 import { TextLoop } from "react-text-loop-next";
 import Logo from '../media/logo.png';
+import { ActionIconLink, TextAnchor } from '~/components/atoms';
 
 const useStyles = createStyles((theme) => ({
   inner: {
@@ -30,7 +30,7 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: '20vh',
+    marginTop: '15vh',
 
     [theme.fn.smallerThan('sm')]: {
       justifyContent: 'flex-start',
@@ -97,16 +97,6 @@ const SWITCHABLE_TEXT = [
 const Index = () => {
   const { classes } = useStyles();
 
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() =>
-      setIndex(index => index + 1),
-      3000 // every 3 seconds
-    );
-    return () => clearTimeout(intervalId);
-  }, []);
-
   return (
     <Header height={56} mb={120} sx={{ borderBottom: 0 }} >
       <Container className={classes.inner}>
@@ -116,14 +106,8 @@ const Index = () => {
         </Group>
 
         <Group spacing={8} className={classes.social} position="right" noWrap>
-          { /* @ts-expect-error */}
-          <ActionIcon size="lg" component={Anchor} href='https://twitter.com/theravengrey' target="_blank">
-            <BrandTwitter size={24} />
-          </ActionIcon>
-          { /* @ts-expect-error */}
-          <ActionIcon size="lg" component={Anchor} href='https://twitter.com/thegreyraven' target="_blank">
-            <BrandDiscord size={24} />
-          </ActionIcon>
+          <ActionIconLink url='https://twitter.com/theravengrey' icon={<BrandTwitter size={24} />} />
+          <ActionIconLink url='https://discord.gg/6fGthxY594' icon={ <BrandDiscord size={24} />} />
         </Group>
       </Container>
 
@@ -146,9 +130,10 @@ const Index = () => {
             <List.Item>Easily upload and store files required by your software.</List.Item>
             <List.Item>Write and publish news in realtime to your clients.</List.Item>
           </List>
+          <TextAnchor text='See full list of' linkText='features' to='/features/' />
 
           <Button mt={12} size='xl' radius={0} className={classes.startButton} component={Link} to='/authenticate/'>GET STARTED</Button>
-          <Text weight={500}>By joining, you agree with our <span className={classes.linkText}>Terms of Service</span></Text>
+          <TextAnchor text='By joining, you agree with our' linkText='Terms of Service' to='/tos/' />
         </Group>
       </Container>
     </Header>
