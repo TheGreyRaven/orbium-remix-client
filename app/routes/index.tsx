@@ -34,6 +34,7 @@ const useStyles = createStyles((theme) => ({
 
     [theme.fn.smallerThan('sm')]: {
       justifyContent: 'flex-start',
+      marginTop: '5vh',
     },
   },
 
