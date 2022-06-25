@@ -8,7 +8,6 @@ const useStyles = createStyles((theme) => ({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: 56,
 
     [theme.fn.smallerThan('sm')]: {
       justifyContent: 'flex-start',
@@ -28,7 +27,7 @@ const useStyles = createStyles((theme) => ({
 const SiteHeader = () => {
   const { classes } = useStyles();
   return (
-    <Header height={56} mb={120} sx={{ borderBottom: 0 }} >
+    <Header height={56} sx={{ borderBottom: 0 }} >
       <Container className={classes.inner}>
         <Group>
           <Image src={Logo} height={48} />

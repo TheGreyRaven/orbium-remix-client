@@ -6,26 +6,6 @@ import { TextAnchor } from '~/components/atoms';
 import { Header } from '~/components';
 
 const useStyles = createStyles((theme) => ({
-  inner: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    height: 56,
-
-    [theme.fn.smallerThan('sm')]: {
-      justifyContent: 'flex-start',
-    },
-  },
-
-  social: {
-    width: 260,
-
-    [theme.fn.smallerThan('sm')]: {
-      width: 'auto',
-      marginLeft: 'auto',
-    },
-  },
-
   outer: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -82,9 +62,6 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  linkText: {
-    color: '#F09821'
-  }
 }));
 
 const SWITCHABLE_TEXT = [
