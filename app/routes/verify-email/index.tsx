@@ -1,8 +1,8 @@
-import { Button, Container, createStyles, Group, Paper, Text, ThemeIcon } from "@mantine/core";
+import { Button, Container, createStyles, Stack, Paper, Text, TextInput, ThemeIcon } from "@mantine/core";
 import type { LoaderFunction} from "@remix-run/node";
-import { redirect } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { Mail } from "tabler-icons-react";
+import { Link, useLoaderData } from "@remix-run/react";
+import {  MoodHappy, MoodSad } from "tabler-icons-react";
+import { SDK } from "~/appwrite";
 import { Header } from "~/components";
 
 const ICON_SIZE = 60;
@@ -54,23 +54,33 @@ export const loader: LoaderFunction = async ({
   request,
 }) => {
   const url = new URL(request.url);
-  let userId = url.searchParams.get("userId");
-  let secret = url.searchParams.get("secret");
-  let expire = url.searchParams.get("expire");
+  let userId = url.searchParams.get("userId") ?? null;
+  let secret = url.searchParams.get("secret") ?? null;
+  let expire = url.searchParams.get("expire") ?? null;
 
-  if (Date.now() > Number(expire) || !userId || !secret) {
-    return redirect("/")
+  if (Date.now() > Number(expire) * 1000 || !userId || !secret) {
+    return {
+      success: false,
+      error: 'Missing parameters'
+    }
   }
-  
-  return {
-    userId: userId,
-    secret: secret
+
+  try {
+    await SDK.account.updateVerification(userId, secret)
+    return {
+      success: true
+    }
+  } catch (err: any) {
+    return {
+      success: false,
+      error: err.message
+    }
   }
 };
 
 const VerifyEmail = () => {
   const { classes } = useStyles();
-  //const { userId, secret } = useLoaderData();
+  const { success, error } = useLoaderData();
 
   return (
     <>
@@ -78,21 +88,27 @@ const VerifyEmail = () => {
       <Container className={classes.outer}>
         <Paper radius="md" className={classes.card} mt={ICON_SIZE / 3}>
           <ThemeIcon className={classes.icon} size={ICON_SIZE} radius={ICON_SIZE}>
-            <Mail size={34} />
+          { success ? <MoodHappy size={34} /> : <MoodSad size={34} /> }
           </ThemeIcon>
 
           <Text align="center" size="xl" weight={700} className={classes.title}>
-            Welcome to Orbium
+            { success ? 'Wohoo, welcome to Orbium' : 'Oh no, something went wrong!' }
           </Text>
           <Text color="dimmed" align="center" size="md" mt={8}>
-            We're excited to have you here with us, to get started you just need to confirm your email by pressing the button below!
+          { success ? 'We\'re excited to have you here with us, your email has now been confirmed so to get started just press the button below!' :
+          `Sadly we were not able to confirm your email with the reason: ${error}, please try again later or request a new email verification!` }
           </Text>
 
-          <Group position="apart" mt="xl">
-            <Button className={classes.startButton} fullWidth>
-              CONFIRM EMAIL
-            </Button>
-          </Group>
+          <Stack mt="xl">
+            { success ? (
+              <Button className={classes.startButton} fullWidth component={Link} to="/dashboard/">
+                Go to dashboard
+              </Button>
+            ) : [
+              <TextInput key={0} label="Your email" placeholder="user@orbium.xyz" required />,
+              <Button key={1} className={classes.startButton}>Request new confirmation</Button>
+            ]}
+          </Stack>
           <Text color="dimmed" align="center" size="xs" mt="xl">
             Psst. If you run into any problems just send us a message on Discord, link is in the top right corner!
           </Text>
