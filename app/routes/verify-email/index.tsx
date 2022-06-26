@@ -70,7 +70,7 @@ export const loader: LoaderFunction = async ({
 
 const VerifyEmail = () => {
   const { classes } = useStyles();
-  const { userId, secret } = useLoaderData();
+  //const { userId, secret } = useLoaderData();
 
   return (
     <>
