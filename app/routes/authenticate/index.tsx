@@ -1,15 +1,10 @@
 import { Transition } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Header } from "~/components";
 import { ForgotPassword, LoginUser, RegisterUser } from "~/components/elements";
 
 const Index = () => {
-  const [type, setType] = useState<string | undefined>(undefined);
-  useEffect(() => {
-    setTimeout(() => {
-      setType('login')
-    }, 100)
-  }, [])
+  const [type, setType] = useState<string>('login');
 
   return (
     <>
