@@ -1,77 +1,30 @@
-import { Anchor, Button, Checkbox, createStyles, Group, Paper, PasswordInput, Text, TextInput, Title, Container } from "@mantine/core";
-import { Link } from "@remix-run/react";
+import { Transition } from "@mantine/core";
+import { useEffect, useState } from "react";
 import { Header } from "~/components";
-
-const useStyles = createStyles((theme) => ({
-  container: {
-    maxWidth: '30%',
-    [theme.fn.smallerThan('sm')]: {
-      maxWidth: '100%',
-    },
-  },
-  titleText: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 900
-  },
-
-  button: {
-    backgroundColor: '#F09821',
-    '&:hover': {
-      backgroundColor: '#c27c1c',
-    },
-  },
-
-  linkText: {
-		color: "#F09821",
-    '&:link': {
-      textDecoration: 'none'
-    },
-    '&:visited': {
-      textDecoration: 'none'
-    },
-    '&:active': {
-      textDecoration: 'none'
-    },
-    '&:hover': {
-      textDecoration: 'none',
-      color: '#c27c1c'
-    },
-	},
-}))
+import { ForgotPassword, LoginUser, RegisterUser } from "~/components/elements";
 
 const Index = () => {
-  const { classes } = useStyles();
+  const [type, setType] = useState<string | undefined>(undefined);
+  useEffect(() => {
+    setTimeout(() => {
+      setType('login')
+    }, 100)
+  }, [])
+
   return (
     <>
       <Header />
-      <Container my={40} className={classes.container}>
-        <Title
-          align="center"
-          className={classes.titleText}
-        >
-          Welcome back!
-        </Title>
-        <Text color="dimmed" size="sm" align="center" mt={5}>
-          Do not have an account yet?{' '}
-          <Anchor component={Link} to="#" size="sm" className={classes.linkText}>
-            Create account
-          </Anchor>
-        </Text>
+      <Transition mounted={type === 'login'} transition="fade" duration={400} timingFunction="ease">
+        { (styles) => <LoginUser transitionStyle={styles} setType={setType} /> }
+      </Transition>
 
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
-          <TextInput label="Email" placeholder="email@orbium.xyz" required />
-          <PasswordInput label="Password" placeholder="Your password" required mt="md" />
-          <Group position="apart" mt="md">
-            <Checkbox label="Remember me" />
-            <Anchor component={Link} to="./forgot" size="sm" className={classes.linkText}>
-              Forgot password?
-            </Anchor>
-          </Group>
-          <Button fullWidth mt="xl" className={classes.button}>
-            Sign in
-          </Button>
-        </Paper>
-      </Container>
+      <Transition mounted={type === 'register'} transition="fade" duration={400} timingFunction="ease">
+        { (styles) => <RegisterUser transitionStyle={styles} setType={setType} /> }
+      </Transition>
+
+      <Transition mounted={type === 'forgot'} transition="fade" duration={400} timingFunction="ease">
+        { (styles) => <ForgotPassword transitionStyle={styles} setType={setType} /> }
+      </Transition>
     </>
   )
 }

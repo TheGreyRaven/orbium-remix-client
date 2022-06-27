@@ -32,7 +32,7 @@ const App = () => {
             '#0a0a0a',
             '#141517',
             '#101113'
-          ]
+          ],
         }
 			}}
 			withGlobalStyles

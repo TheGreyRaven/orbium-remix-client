@@ -1,23 +1,14 @@
-import React from 'react';
-import {
-  createStyles,
-  Paper,
-  Title,
-  Text,
-  TextInput,
-  Button,
-  Container,
-  Group,
-  Anchor,
-  Center,
-  Box,
-} from '@mantine/core';
-import { ArrowLeft } from 'tabler-icons-react';
-import { Header } from '~/components';
-import { Link } from '@remix-run/react';
+import { Anchor, Box, Button, Center, Container, createStyles, Group, Paper, Text, TextInput, Title } from "@mantine/core";
+import type { CSSProperties } from "react";
+import { ArrowLeft } from "tabler-icons-react";
 
 const useStyles = createStyles((theme) => ({
   container: {
+    position: 'absolute',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    left: 0,
+    right: 0,
     maxWidth: '30%',
     [theme.fn.smallerThan('sm')]: {
       maxWidth: '100%',
@@ -55,12 +46,10 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ transitionStyle, setType }: { transitionStyle: CSSProperties, setType: Function }) => {
   const { classes } = useStyles();
-
   return (
-    <>
-      <Header />
+    <div style={transitionStyle}>
       <Container my={40} className={classes.container}>
         <Title className={classes.title} align="center">
           Forgot your password?
@@ -72,7 +61,7 @@ const ForgotPassword = () => {
         <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
           <TextInput label="Your email" placeholder="email@orbium.xyz" required />
           <Group position="apart" mt="lg" className={classes.controls}>
-            <Anchor color="dimmed" size="sm" className={classes.control} component={Link} to="/authenticate/">
+            <Anchor color="dimmed" size="sm" className={classes.control} onClick={() => setType('login')}>
               <Center inline>
                 <ArrowLeft size={12} />
                 <Box ml={5}>Back to login page</Box>
@@ -82,8 +71,8 @@ const ForgotPassword = () => {
           </Group>
         </Paper>
       </Container>
-    </>
-  );
+    </div>
+  )
 }
 
 export default ForgotPassword;
