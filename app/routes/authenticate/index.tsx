@@ -2,6 +2,7 @@ import { Transition } from "@mantine/core";
 import type { MetaFunction } from "@remix-run/node";
 import { useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
+import Logo from "../../media/logo.png";
 
 export const meta: MetaFunction = () => ({
 	charset: "utf-8",
@@ -11,6 +12,9 @@ export const meta: MetaFunction = () => ({
 	robots: 'index, follow',
 	language: 'English',
 	viewport: "width=device-width,initial-scale=1",
+  'og:image': Logo,
+  'og:title': "Orbium - Authenticate",
+  'og:description': 'Create, login or request a new password for your account.'
 });
 
 const Index = () => {

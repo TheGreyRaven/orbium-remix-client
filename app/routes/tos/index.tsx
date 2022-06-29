@@ -4,6 +4,7 @@ import {
 	TypographyStylesProvider,
 } from "@mantine/core";
 import type { MetaFunction } from "@remix-run/node";
+import Logo from '../../media/logo.png';
 
 export const meta: MetaFunction = () => ({
 	charset: "utf-8",
@@ -13,6 +14,9 @@ export const meta: MetaFunction = () => ({
 	robots: 'index, follow',
 	language: 'English',
 	viewport: "width=device-width,initial-scale=1",
+  'og:image': Logo,
+  'og:title': "Orbium - Terms Of Service",
+  'og:description': 'Read Orbiums terms of service agreement.'
 });
 
 const HTML = `

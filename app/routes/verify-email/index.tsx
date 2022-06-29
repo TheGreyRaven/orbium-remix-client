@@ -1,8 +1,23 @@
 import { Button, Container, createStyles, Stack, Paper, Text, TextInput, ThemeIcon } from "@mantine/core";
-import type { LoaderFunction} from "@remix-run/node";
+import type { LoaderFunction, MetaFunction} from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import {  MoodHappy, MoodSad } from "tabler-icons-react";
 import { SDK } from "~/appwrite";
+import Logo from '../../media/logo.png';
+
+export const meta: MetaFunction = () => ({
+	charset: "utf-8",
+	title: "Orbium - Verify email",
+	description: 'Verify your Orbium account email.',
+	keywords: 'Orbium, licensing, hwid, cheap, cloud-hosted, features',
+	robots: 'index, follow',
+	language: 'English',
+	viewport: "width=device-width,initial-scale=1",
+  'og:image': Logo,
+  'og:title': "Orbium - Verify email",
+  'og:description': 'Verify your Orbium account email.'
+});
+
 
 const ICON_SIZE = 60;
 

@@ -1,6 +1,7 @@
 import { Group, Text, Accordion, Container, createStyles, Paper, Title, Avatar } from '@mantine/core';
 import type { MetaFunction } from '@remix-run/node';
 import { ChartBar, CloudUpload, CurrencyDollar, Dashboard, Lifebuoy, Lock, Server } from "tabler-icons-react";
+import Logo from "../../media/logo.png";
 
 export const meta: MetaFunction = () => ({
 	charset: "utf-8",
@@ -10,6 +11,9 @@ export const meta: MetaFunction = () => ({
 	robots: 'index, follow',
 	language: 'English',
 	viewport: "width=device-width,initial-scale=1",
+  'og:image': Logo,
+  'og:title': "Orbium - Features",
+  'og:description': 'See all the features that Orbium has to offer.'
 });
 
 
