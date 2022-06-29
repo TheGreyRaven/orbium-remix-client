@@ -7,7 +7,7 @@ import {
 	TextInput,
 	Title,
 } from "@mantine/core";
-import { json } from "@remix-run/node";
+import { ActionFunction, json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useState } from "react";
 import { sendgridClient } from "~/sendmail.server";
@@ -109,8 +109,7 @@ const Index = () => {
 	);
 };
 
-// @ts-expect-error
-export async function action({ request }) {
+export const action: ActionFunction = async ({ request }) => {
 	const body = await request.formData();
 	const email = body.get("email");
 
