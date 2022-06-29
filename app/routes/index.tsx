@@ -4,6 +4,7 @@ import { Check } from 'tabler-icons-react';
 import { TextLoop } from "react-text-loop-next";
 import { TextAnchor } from '~/components/atoms';
 import type { MetaFunction } from '@remix-run/node';
+import Logo from '../media/logo.png';
 
 export const meta: MetaFunction = () => ({
 	charset: "utf-8",
@@ -13,6 +14,9 @@ export const meta: MetaFunction = () => ({
 	robots: 'index, follow',
 	language: 'English',
 	viewport: "width=device-width,initial-scale=1",
+  'og:image': Logo,
+  'og:title': "Orbium - Advanced software licensing",
+  'og:description': 'Orbium is the next generation of cloud-hosted software licensing, not only is it simple to use its also incredibly flexible and powerful.'
 });
 
 const useStyles = createStyles((theme) => ({
