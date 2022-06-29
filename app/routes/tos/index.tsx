@@ -3,6 +3,17 @@ import {
 	createStyles,
 	TypographyStylesProvider,
 } from "@mantine/core";
+import type { MetaFunction } from "@remix-run/node";
+
+export const meta: MetaFunction = () => ({
+	charset: "utf-8",
+	title: "Orbium - Terms Of Service",
+	description: 'Read Orbiums terms of service agreement.',
+	keywords: 'Orbium, licensing, hwid, cheap, cloud-hosted, features',
+	robots: 'index, follow',
+	language: 'English',
+	viewport: "width=device-width,initial-scale=1",
+});
 
 const HTML = `
 <style>

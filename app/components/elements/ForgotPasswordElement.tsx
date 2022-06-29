@@ -1,6 +1,17 @@
 import { Anchor, Box, Button, Center, Container, createStyles, Group, Paper, Text, TextInput, Title } from "@mantine/core";
+import type { MetaFunction } from "@remix-run/node";
 import type { CSSProperties } from "react";
 import { ArrowLeft } from "tabler-icons-react";
+
+export const meta: MetaFunction = () => ({
+	charset: "utf-8",
+	title: "Orbium - Forgot Password",
+	description: 'Did you forget your password? Request a new one here!',
+	keywords: 'Orbium, licensing, hwid, cheap, cloud-hosted, features',
+	robots: 'index, follow',
+	language: 'English',
+	viewport: "width=device-width,initial-scale=1",
+});
 
 const useStyles = createStyles((theme) => ({
   container: {

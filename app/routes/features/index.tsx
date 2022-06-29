@@ -1,5 +1,17 @@
 import { Group, Text, Accordion, Container, createStyles, Paper, Title, Avatar } from '@mantine/core';
+import type { MetaFunction } from '@remix-run/node';
 import { ChartBar, CloudUpload, CurrencyDollar, Dashboard, Lifebuoy, Lock, Server } from "tabler-icons-react";
+
+export const meta: MetaFunction = () => ({
+	charset: "utf-8",
+	title: "Orbium - Features",
+	description: 'See all the features that Orbium has to offer.',
+	keywords: 'Orbium, licensing, hwid, cheap, cloud-hosted, features',
+	robots: 'index, follow',
+	language: 'English',
+	viewport: "width=device-width,initial-scale=1",
+});
+
 
 const useStyles = createStyles((theme) => ({
   container: {

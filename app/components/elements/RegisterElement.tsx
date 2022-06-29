@@ -1,5 +1,16 @@
 import { Anchor, Button, Container, createStyles, Paper, PasswordInput, Text, TextInput, Title } from "@mantine/core";
+import type { MetaFunction } from "@remix-run/node";
 import type { CSSProperties } from "react";
+
+export const meta: MetaFunction = () => ({
+	charset: "utf-8",
+	title: "Orbium - Create new account",
+	description: 'Register to get access to the Orbium dashboard and all the features.',
+	keywords: 'Orbium, licensing, hwid, cheap, cloud-hosted, features',
+	robots: 'index, follow',
+	language: 'English',
+	viewport: "width=device-width,initial-scale=1",
+});
 
 const useStyles = createStyles((theme) => ({
   container: {

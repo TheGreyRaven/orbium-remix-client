@@ -1,4 +1,3 @@
-import type { MetaFunction } from "@remix-run/node";
 import {
 	Links,
 	LiveReload,
@@ -9,12 +8,6 @@ import {
 } from "@remix-run/react";
 import { MantineProvider } from "@mantine/core";
 import { Layout } from "./components";
-
-export const meta: MetaFunction = () => ({
-	charset: "utf-8",
-	title: "Orbium - Advanced software licensing",
-	viewport: "width=device-width,initial-scale=1",
-});
 
 const App = () => {
 	return (

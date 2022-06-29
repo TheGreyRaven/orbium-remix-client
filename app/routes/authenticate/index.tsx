@@ -1,6 +1,17 @@
 import { Transition } from "@mantine/core";
+import type { MetaFunction } from "@remix-run/node";
 import { useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
+
+export const meta: MetaFunction = () => ({
+	charset: "utf-8",
+	title: "Orbium - Authenticate",
+	description: 'Create, login or request a new password for your account!',
+	keywords: 'Orbium, licensing, hwid, cheap, cloud-hosted',
+	robots: 'index, follow',
+	language: 'English',
+	viewport: "width=device-width,initial-scale=1",
+});
 
 const Index = () => {
   const [type, setType] = useState<string>('login');
