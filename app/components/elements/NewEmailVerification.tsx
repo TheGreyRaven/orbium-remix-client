@@ -86,7 +86,7 @@ const NewEmailVerification = ({ transitionStyle, setType }: { transitionStyle: C
         </Text>
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md" className={classes.paperBackground}>
-          <TextInput label="Email" placeholder="email@orbium.xyz" required />
+          <TextInput label="Email" type="email" placeholder="email@orbium.xyz" required />
           <Group position="apart" mt="lg" className={classes.controls}>
             <Anchor color="dimmed" size="sm" className={classes.control} onClick={() => setType('login')}>
               <Center inline>

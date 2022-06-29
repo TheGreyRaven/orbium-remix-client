@@ -72,7 +72,7 @@ const RegisterUser = ({ transitionStyle, setType }: { transitionStyle: CSSProper
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md">
           <TextInput label="Username" placeholder="Orbium" required />
-          <TextInput label="Email" placeholder="user@orbium.xyz" required />
+          <TextInput label="Email" type="email" placeholder="user@orbium.xyz" required mt="md" />
           <PasswordInput label="Password" placeholder="Your password" required mt="md" />
           <PasswordInput label="Confirm password" placeholder="Your password" required mt="md" />
           <Button fullWidth mt="xl" className={classes.button}>

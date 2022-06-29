@@ -74,7 +74,7 @@ const LoginUser = ({ transitionStyle, setType }: { transitionStyle: CSSPropertie
         </Text>
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md" className={classes.paperBackground}>
-          <TextInput label="Email" placeholder="email@orbium.xyz" required />
+          <TextInput label="Email" type="email" placeholder="email@orbium.xyz" required />
           <PasswordInput label="Password" placeholder="Your password" required mt="md" />
           <Group position="apart" mt="md">
             <Anchor size="sm" className={classes.linkText} onClick={() => setType('forgot')}>
