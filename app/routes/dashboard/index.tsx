@@ -57,7 +57,7 @@ const ThankYou = () => {
 
 const Index = () => {
 	const { classes } = useStyles();
-	const [isEnabled, setEnabled] = useState(false);
+	const [isDisabled, setDisabled] = useState(false);
 	const actionData = useActionData();
 
 	return (
@@ -83,20 +83,21 @@ const Index = () => {
 						radius="md"
 						sx={{ backgroundColor: "#101010" }}
 					>
-						<Form method="post">
+						<Form method="post" onSubmit={() => setDisabled(true)}>
 							<TextInput
 								type="email"
 								name="email"
 								label="Your email"
 								placeholder="user@orbium.xyz"
+								disabled={isDisabled}
 								required
 							/>
 							<Button
 								mt={16}
 								className={classes.startButton}
 								type="submit"
-								disabled={isEnabled}
-								onClick={() => setEnabled(true)}
+								disabled={isDisabled}
+								loading={isDisabled}
 							>
 								Join the newsletter
 							</Button>

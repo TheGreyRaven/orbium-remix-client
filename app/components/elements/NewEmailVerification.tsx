@@ -38,17 +38,8 @@ const useStyles = createStyles((theme) => ({
   },
   linkText: {
 		color: "#F09821",
-    '&:link': {
-      textDecoration: 'none'
-    },
-    '&:visited': {
-      textDecoration: 'none'
-    },
-    '&:active': {
-      textDecoration: 'none'
-    },
+    textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'none',
       color: '#c27c1c'
     },
 	},

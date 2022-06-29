@@ -36,20 +36,15 @@ const useStyles = createStyles((theme) => ({
   },
   linkText: {
 		color: "#F09821",
-    '&:link': {
-      textDecoration: 'none'
-    },
-    '&:visited': {
-      textDecoration: 'none'
-    },
-    '&:active': {
-      textDecoration: 'none'
-    },
+    textDecoration: 'none',
     '&:hover': {
       textDecoration: 'none',
       color: '#c27c1c'
     },
 	},
+  paperBackground: {
+    backgroundColor: '#101010'
+  }
 }))
 
 const RegisterUser = ({ transitionStyle, setType }: { transitionStyle: CSSProperties, setType: Function }) => {
@@ -70,7 +65,7 @@ const RegisterUser = ({ transitionStyle, setType }: { transitionStyle: CSSProper
           </Anchor>
         </Text>
 
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md">
+        <Paper withBorder shadow="md" p={30} mt={30} radius="md" className={classes.paperBackground}>
           <TextInput label="Username" placeholder="Orbium" required />
           <TextInput label="Email" type="email" placeholder="user@orbium.xyz" required mt="md" />
           <PasswordInput label="Password" placeholder="Your password" required mt="md" />

@@ -3,17 +3,8 @@ import { createStyles, Text } from "@mantine/core";
 const useStyles = createStyles(() => ({
 	linkText: {
 		color: "#F09821",
-    '&:link': {
-      textDecoration: 'none'
-    },
-    '&:visited': {
-      textDecoration: 'none'
-    },
-    '&:active': {
-      textDecoration: 'none'
-    },
+		textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'none',
       color: '#c27c1c'
     },
 	},

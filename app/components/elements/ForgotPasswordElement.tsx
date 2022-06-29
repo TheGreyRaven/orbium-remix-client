@@ -55,6 +55,9 @@ const useStyles = createStyles((theme) => ({
       textAlign: 'center',
     },
   },
+  paperBackground: {
+    backgroundColor: '#101010'
+  }
 }));
 
 const ForgotPassword = ({ transitionStyle, setType }: { transitionStyle: CSSProperties, setType: Function }) => {
@@ -69,7 +72,7 @@ const ForgotPassword = ({ transitionStyle, setType }: { transitionStyle: CSSProp
           Enter your email to get a reset link
         </Text>
 
-        <Paper withBorder shadow="md" p={30} radius="md" mt="xl">
+        <Paper withBorder shadow="md" p={30} radius="md" mt="xl" className={classes.paperBackground}>
           <TextInput label="Your email" placeholder="email@orbium.xyz" required />
           <Group position="apart" mt="lg" className={classes.controls}>
             <Anchor color="dimmed" size="sm" className={classes.control} onClick={() => setType('login')}>
