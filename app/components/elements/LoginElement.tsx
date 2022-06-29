@@ -69,6 +69,10 @@ const LoginUser = ({ transitionStyle, setType }: { transitionStyle: CSSPropertie
             <Anchor size="sm" className={classes.linkText} onClick={() => setType('forgot')}>
               Forgot password?
             </Anchor>
+
+            <Anchor size="sm" className={classes.linkText} onClick={() => setType('request')}>
+              Request email verification
+            </Anchor>
           </Group>
           <Button fullWidth mt="xl" className={classes.button}>
             Sign in
