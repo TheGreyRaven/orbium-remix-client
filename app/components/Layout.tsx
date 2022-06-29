@@ -42,24 +42,27 @@ const useStyles = createStyles((theme) => ({
 	},
 }))
 
-const SiteHeader = () => {
+const Layout = ({ children }: { children: JSX.Element }) => {
   const { classes } = useStyles();
   return (
-    <Header height={56} sx={{ borderBottom: 0 }} >
-      <Container className={classes.inner} onClick={() => console.log("asd")}>
-        <Anchor component={Link} to="/" className={classes.link}>
-          <Group>
-            <Image src={Logo} height={48} />
-            <Text weight={700} size="xl">Orbium</Text>
+    <>
+      <Header height={56} sx={{ borderBottom: 0 }} >
+        <Container className={classes.inner}>
+          <Anchor component={Link} to="/" className={classes.link}>
+            <Group>
+              <Image src={Logo} height={48} />
+              <Text weight={700} size="xl">Orbium</Text>
+            </Group>
+          </Anchor>
+          <Group spacing={8} className={classes.social} position="right" noWrap>
+            <ActionIconLink url='https://twitter.com/theravengrey' icon={<BrandTwitter size={24} />} />
+            <ActionIconLink url='https://discord.gg/6fGthxY594' icon={ <BrandDiscord size={24} />} />
           </Group>
-        </Anchor>
-        <Group spacing={8} className={classes.social} position="right" noWrap>
-          <ActionIconLink url='https://twitter.com/theravengrey' icon={<BrandTwitter size={24} />} />
-          <ActionIconLink url='https://discord.gg/6fGthxY594' icon={ <BrandDiscord size={24} />} />
-        </Group>
-      </Container>
-    </Header>
+        </Container>
+      </Header>
+      {children}
+    </>
   )
 }
 
-export { SiteHeader }
+export { Layout }

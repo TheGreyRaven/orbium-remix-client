@@ -3,7 +3,6 @@ import {
 	createStyles,
 	TypographyStylesProvider,
 } from "@mantine/core";
-import { Header } from "~/components";
 
 const HTML = `
 <style>
@@ -157,14 +156,11 @@ const TOS = () => {
 	const { classes } = useStyles();
 
 	return (
-		<>
-			<Header />
-			<Container className={classes.outer}>
-				<TypographyStylesProvider mb={32}>
-					<div dangerouslySetInnerHTML={{ __html: HTML }} />
-				</TypographyStylesProvider>
-			</Container>
-		</>
+    <Container className={classes.outer}>
+      <TypographyStylesProvider mb={32}>
+        <div dangerouslySetInnerHTML={{ __html: HTML }} />
+      </TypographyStylesProvider>
+    </Container>
 	);
 };
 

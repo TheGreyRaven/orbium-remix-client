@@ -17,7 +17,6 @@ const useStyles = createStyles((theme) => ({
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
     fontWeight: 900
   },
-
   button: {
     backgroundColor: '#F09821',
     '&:hover': {
@@ -40,9 +39,9 @@ const useStyles = createStyles((theme) => ({
       color: '#c27c1c'
     },
 	},
-  checkBox: {
-    backgroundColor: '#F09821',
-  },
+  paperBackground: {
+    backgroundColor: '#101010'
+  }
 }))
 
 const LoginUser = ({ transitionStyle, setType }: { transitionStyle: CSSProperties, setType: Function }) => {
@@ -63,11 +62,10 @@ const LoginUser = ({ transitionStyle, setType }: { transitionStyle: CSSPropertie
           </Anchor>
         </Text>
 
-        <Paper withBorder shadow="md" p={30} mt={30} radius="md" sx={{ backgroundColor: '#101010' }}>
+        <Paper withBorder shadow="md" p={30} mt={30} radius="md" className={classes.paperBackground}>
           <TextInput label="Email" placeholder="email@orbium.xyz" required />
           <PasswordInput label="Password" placeholder="Your password" required mt="md" />
           <Group position="apart" mt="md">
-            <Checkbox label="Remember me" color="#F09821" />
             <Anchor size="sm" className={classes.linkText} onClick={() => setType('forgot')}>
               Forgot password?
             </Anchor>

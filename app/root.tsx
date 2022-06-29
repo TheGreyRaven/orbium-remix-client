@@ -8,6 +8,7 @@ import {
 	ScrollRestoration,
 } from "@remix-run/react";
 import { MantineProvider } from "@mantine/core";
+import { Layout } from "./components";
 
 export const meta: MetaFunction = () => ({
 	charset: "utf-8",
@@ -44,7 +45,9 @@ const App = () => {
 					<Links />
 				</head>
 				<body>
-					<Outlet />
+					<Layout>
+						<Outlet />
+					</Layout>
 					<ScrollRestoration />
 					<Scripts />
 					<LiveReload />

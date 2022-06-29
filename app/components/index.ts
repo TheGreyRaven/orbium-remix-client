@@ -1,7 +1,7 @@
-import { SiteHeader as Header } from "./Header";
+import { Layout } from "./Layout";
 
 export {
-  Header,
+  Layout,
 }
 
 export * from "./atoms";

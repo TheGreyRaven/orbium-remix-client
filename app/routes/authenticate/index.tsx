@@ -1,6 +1,5 @@
 import { Transition } from "@mantine/core";
 import { useState } from "react";
-import { Header } from "~/components";
 import { ForgotPassword, LoginUser, RegisterUser } from "~/components/elements";
 
 const Index = () => {
@@ -8,7 +7,6 @@ const Index = () => {
 
   return (
     <>
-      <Header />
       <Transition mounted={type === 'login'} transition="fade" duration={400} timingFunction="ease">
         { (styles) => <LoginUser transitionStyle={styles} setType={setType} /> }
       </Transition>

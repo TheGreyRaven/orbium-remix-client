@@ -3,7 +3,6 @@ import type { LoaderFunction} from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import {  MoodHappy, MoodSad } from "tabler-icons-react";
 import { SDK } from "~/appwrite";
-import { Header } from "~/components";
 
 const ICON_SIZE = 60;
 
@@ -83,38 +82,35 @@ const VerifyEmail = () => {
   const { success, error } = useLoaderData();
 
   return (
-    <>
-      <Header />
-      <Container className={classes.outer}>
-        <Paper radius="md" className={classes.card} mt={ICON_SIZE / 3}>
-          <ThemeIcon className={classes.icon} size={ICON_SIZE} radius={ICON_SIZE}>
-          { success ? <MoodHappy size={34} /> : <MoodSad size={34} /> }
-          </ThemeIcon>
+    <Container className={classes.outer}>
+      <Paper radius="md" className={classes.card} mt={ICON_SIZE / 3}>
+        <ThemeIcon className={classes.icon} size={ICON_SIZE} radius={ICON_SIZE}>
+        { success ? <MoodHappy size={34} /> : <MoodSad size={34} /> }
+        </ThemeIcon>
 
-          <Text align="center" size="xl" weight={700} className={classes.title}>
-            { success ? 'Wohoo, welcome to Orbium' : 'Oh no, something went wrong!' }
-          </Text>
-          <Text color="dimmed" align="center" size="md" mt={8}>
-          { success ? 'We\'re excited to have you here with us, your email has now been confirmed so to get started just press the button below!' :
-          `Sadly we were not able to confirm your email with the reason: ${error}, please try again later or request a new email verification!` }
-          </Text>
+        <Text align="center" size="xl" weight={700} className={classes.title}>
+          { success ? 'Wohoo, welcome to Orbium' : 'Oh no, something went wrong!' }
+        </Text>
+        <Text color="dimmed" align="center" size="md" mt={8}>
+        { success ? 'We\'re excited to have you here with us, your email has now been confirmed so to get started just press the button below!' :
+        `Sadly we were not able to confirm your email with the reason: ${error}, please try again later or request a new email verification!` }
+        </Text>
 
-          <Stack mt="xl">
-            { success ? (
-              <Button className={classes.startButton} fullWidth component={Link} to="/dashboard/">
-                Go to dashboard
-              </Button>
-            ) : [
-              <TextInput key={0} label="Your email" placeholder="user@orbium.xyz" required />,
-              <Button key={1} className={classes.startButton}>Request new confirmation</Button>
-            ]}
-          </Stack>
-          <Text color="dimmed" align="center" size="xs" mt="xl">
-            Psst. If you run into any problems just send us a message on Discord, link is in the top right corner!
-          </Text>
-        </Paper>
-      </Container>
-    </>
+        <Stack mt="xl">
+          { success ? (
+            <Button className={classes.startButton} fullWidth component={Link} to="/dashboard/">
+              Go to dashboard
+            </Button>
+          ) : [
+            <TextInput key={0} label="Your email" placeholder="user@orbium.xyz" required />,
+            <Button key={1} className={classes.startButton}>Request new confirmation</Button>
+          ]}
+        </Stack>
+        <Text color="dimmed" align="center" size="xs" mt="xl">
+          Psst. If you run into any problems just send us a message on Discord, link is in the top right corner!
+        </Text>
+      </Paper>
+    </Container>
   )
 }
 

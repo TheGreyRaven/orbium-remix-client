@@ -1,4 +1,3 @@
-import { Header } from "~/components";
 import { Group, Text, Accordion, Container, createStyles, Paper, Title, Avatar } from '@mantine/core';
 import { ChartBar, CloudUpload, CurrencyDollar, Dashboard, Lifebuoy, Lock, Server } from "tabler-icons-react";
 
@@ -95,25 +94,22 @@ const Features = () => {
   ));
 
   return (
-    <>
-      <Header />
-      <Container my={40} className={classes.container}>
-        <Title
-          align="center"
-          className={classes.titleText}
-        >
-          What we can offer
-        </Title>
-        <Text color="dimmed" size="sm" align="center" mt={5}>
-          This list covers our most important features and more features are added regularly
-        </Text>
-        <Paper withBorder shadow="md" p={8} mt={30} radius="md" sx={{ backgroundColor: '#101010' }}>
-          <Accordion iconPosition="right">
-            {items}
-          </Accordion>
-        </Paper>
-      </Container>
-    </>
+    <Container my={40} className={classes.container}>
+      <Title
+        align="center"
+        className={classes.titleText}
+      >
+        What we can offer
+      </Title>
+      <Text color="dimmed" size="sm" align="center" mt={5}>
+        This list covers our most important features and more features are added regularly
+      </Text>
+      <Paper withBorder shadow="md" p={8} mt={30} radius="md" sx={{ backgroundColor: '#101010' }}>
+        <Accordion iconPosition="right">
+          {items}
+        </Accordion>
+      </Paper>
+    </Container>
   )
 }
 
