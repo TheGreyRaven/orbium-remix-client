@@ -1,4 +1,4 @@
-import { Anchor, Container, createStyles, Group, Paper, PasswordInput, Text, TextInput, Title, Checkbox, Button } from "@mantine/core";
+import { Anchor, Container, createStyles, Group, Paper, PasswordInput, Text, TextInput, Title, Button } from "@mantine/core";
 import type { CSSProperties } from "react";
 
 const useStyles = createStyles((theme) => ({
