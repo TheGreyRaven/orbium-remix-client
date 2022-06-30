@@ -7,6 +7,7 @@ declare global {
       APPWRITE_DOMAIN: string;
       APPWRITE_ID: string;
       SENDGRID_KEY: string;
+      COOKIE_SECRET: string;
       NODE_ENV: 'development' | 'production';
       PORT?: string;
       PWD: string;

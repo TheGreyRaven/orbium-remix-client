@@ -10,18 +10,22 @@ const { getSession, commitSession, destroySession } =
 
       // all of these are optional
       // domain: "dev.orbium.xyz",
-      expires: new Date(Date.now() + 15_000),
+      expires: new Date(Date.now() + 86400000),
       httpOnly: true,
-      maxAge: 60,
+      maxAge: 86400000,
       path: "/",
       sameSite: "lax",
-      secrets: ["jesartohkjioesdjrthiojersiojhio0edrtjobn"],
+      secrets: [process.env.COOKIE_SECRET],
       secure: true
     }
   });
 
 export async function checkSession(request: Request) {
   const session = await getSession(request.headers.get('Cookie'));
+
+  if (request.url.includes('/auth') && !session.has('userId')) {
+    return null;
+  }
 
   if (!session.has('userId')) {
     throw redirect('/auth?type=login')

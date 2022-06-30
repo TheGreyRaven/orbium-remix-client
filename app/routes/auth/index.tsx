@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
 import { doLogin } from "~/components/elements/LoginElement";
 import { performRegistration } from "~/components/elements/RegisterElement";
+import { checkSession } from "~/session";
 import Logo from "../../media/logo.png";
 
 export const meta: MetaFunction = () => ({
@@ -32,6 +33,11 @@ const availableTypes = [
 export const loader: LoaderFunction = async ({
   request,
 }) => {
+  const session = await checkSession(request);
+  if (session) {
+    return redirect('/dashboard')
+  }
+
   const url = new URL(request.url);
   const type = url.searchParams.get("type") ?? undefined;
 
