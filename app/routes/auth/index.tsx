@@ -1,9 +1,11 @@
 import { Transition } from "@mantine/core";
-import type { LoaderFunction, MetaFunction} from "@remix-run/node";
+import type { ActionFunction, LoaderFunction, MetaFunction} from "@remix-run/node";
+import { json} from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
+import { performRegistration } from "~/components/elements/RegisterElement";
 import Logo from "../../media/logo.png";
 
 export const meta: MetaFunction = () => ({
@@ -70,5 +72,32 @@ const Index = () => {
     </>
   )
 }
+
+export const action: ActionFunction = async ({ request }) => {
+	const body = await request.formData();
+  const type = body.get('type');
+
+  switch (type) {
+    case 'register':
+      const response = await performRegistration(body)
+      return response
+
+    case 'login':
+      return null
+
+    case 'forgot':
+      return null
+
+    case 'request':
+      return null;
+
+    default:
+      return json({
+        success: false,
+        error: 'Missing post data'
+      })
+  }
+};
+
 
 export default Index;

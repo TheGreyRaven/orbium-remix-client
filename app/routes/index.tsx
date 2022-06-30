@@ -65,7 +65,7 @@ const SWITCHABLE_TEXT = [
   'authenticate customers',
   'load remote DLLs',
   'improve security',
-  'verify HWID',
+  // 'verify HWID',
   'make life easier'
 ]
 
