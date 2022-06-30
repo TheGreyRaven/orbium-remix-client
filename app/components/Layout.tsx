@@ -1,5 +1,5 @@
 import { Container, Group, Image, Text, Header, createStyles, Anchor } from "@mantine/core"
-import { Link } from '@remix-run/react';
+import { Link, useLocation } from '@remix-run/react';
 import { BrandDiscord, BrandTwitter } from "tabler-icons-react"
 import { ActionIconLink } from "./atoms"
 import Logo from '../media/logo.png';
@@ -26,17 +26,8 @@ const useStyles = createStyles((theme) => ({
 
   link: {
 		color: '#C1C2C5',
-    '&:link': {
-      textDecoration: 'none'
-    },
-    '&:visited': {
-      textDecoration: 'none'
-    },
-    '&:active': {
-      textDecoration: 'none'
-    },
+    textDecoration: 'none',
     '&:hover': {
-      textDecoration: 'none',
       color: '#c27c1c'
     },
 	},
@@ -44,22 +35,25 @@ const useStyles = createStyles((theme) => ({
 
 const Layout = ({ children }: { children: JSX.Element }) => {
   const { classes } = useStyles();
+  const path = useLocation().pathname
   return (
     <>
-      <Header height={56} sx={{ borderBottom: 0 }} >
-        <Container className={classes.inner}>
-          <Anchor component={Link} to="/" className={classes.link}>
-            <Group>
-              <Image src={Logo} height={48} />
-              <Text weight={700} size="xl">Orbium</Text>
+      {!path.includes('/dashboard') && (
+        <Header height={56} sx={{ borderBottom: 0 }} >
+          <Container className={classes.inner}>
+            <Anchor component={Link} to="/" className={classes.link}>
+              <Group>
+                <Image src={Logo} height={48} />
+                <Text weight={700} size="xl">Orbium</Text>
+              </Group>
+            </Anchor>
+            <Group spacing={8} className={classes.social} position="right" noWrap>
+              <ActionIconLink url='https://twitter.com/theravengrey' icon={<BrandTwitter size={24} />} />
+              <ActionIconLink url='https://discord.gg/6fGthxY594' icon={ <BrandDiscord size={24} />} />
             </Group>
-          </Anchor>
-          <Group spacing={8} className={classes.social} position="right" noWrap>
-            <ActionIconLink url='https://twitter.com/theravengrey' icon={<BrandTwitter size={24} />} />
-            <ActionIconLink url='https://discord.gg/6fGthxY594' icon={ <BrandDiscord size={24} />} />
-          </Group>
-        </Container>
-      </Header>
+          </Container>
+        </Header>
+      )}
       {children}
     </>
   )

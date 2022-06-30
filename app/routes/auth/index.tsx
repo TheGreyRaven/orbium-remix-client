@@ -39,7 +39,6 @@ export const loader: LoaderFunction = async ({
     return redirect('/dashboard');
   }
 
-
   const url = new URL(request.url);
   const type = url.searchParams.get("type") ?? undefined;
 
