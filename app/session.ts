@@ -23,10 +23,6 @@ const { getSession, commitSession, destroySession } =
 export async function checkSession(request: Request) {
   const session = await getSession(request.headers.get('Cookie'));
 
-  if (request.url.includes('/auth') && !session.has('userId')) {
-    return null;
-  }
-
   if (!session.has('userId')) {
     throw redirect('/auth?type=login')
   }
