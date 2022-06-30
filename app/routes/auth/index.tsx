@@ -5,6 +5,7 @@ import { redirect } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
+import { doLogin } from "~/components/elements/LoginElement";
 import { performRegistration } from "~/components/elements/RegisterElement";
 import Logo from "../../media/logo.png";
 
@@ -79,11 +80,10 @@ export const action: ActionFunction = async ({ request }) => {
 
   switch (type) {
     case 'register':
-      const response = await performRegistration(body)
-      return response
+      return await performRegistration(body)
 
     case 'login':
-      return null
+      return await doLogin(request, body);
 
     case 'forgot':
       return null

@@ -1,6 +1,12 @@
 import { Anchor, Container, createStyles, Group, Paper, PasswordInput, Text, TextInput, Title, Button } from "@mantine/core";
-import type { MetaFunction } from "@remix-run/node";
+import { useForm, zodResolver } from "@mantine/form";
+import type { MetaFunction} from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+import { useFetcher } from "@remix-run/react";
 import type { CSSProperties } from "react";
+import { z } from "zod";
+import { SDK } from "~/appwrite";
+import { commitSession, getSession } from "~/session";
 
 export const meta: MetaFunction = () => ({
 	charset: "utf-8",
@@ -46,8 +52,40 @@ const useStyles = createStyles((theme) => ({
   }
 }))
 
+const loginSchema = z
+	.object({
+		email: z.string().email({ message: "Invalid email" }),
+		password: z
+			.string()
+			.min(8, { message: "Password needs to be at least 8 characters" })
+	})
+
 const LoginUser = ({ transitionStyle, setType }: { transitionStyle: CSSProperties, setType: Function }) => {
   const { classes } = useStyles();
+  const fetcher = useFetcher();
+
+  const form = useForm({
+		schema: zodResolver(loginSchema),
+		initialValues: {
+			email: "",
+			password: "",
+		},
+	});
+
+  const handleLogin = async (values: any) => {
+    try {
+      const session = await SDK.account.createSession(values.email, values.password);
+      const jwt = (await SDK.account.createJWT()).jwt;
+      
+      fetcher.submit(
+        { userId: session.userId, jwt, type: 'login' },
+        { method: 'post' }
+      )
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   return (
     <div style={transitionStyle}>
       <Container my={40} className={classes.container}>
@@ -65,24 +103,41 @@ const LoginUser = ({ transitionStyle, setType }: { transitionStyle: CSSPropertie
         </Text>
 
         <Paper withBorder shadow="md" p={30} mt={30} radius="md" className={classes.paperBackground}>
-          <TextInput label="Email" type="email" placeholder="email@orbium.xyz" required />
-          <PasswordInput label="Password" placeholder="Your password" required mt="md" />
-          <Group position="apart" mt="md">
-            <Anchor size="sm" className={classes.linkText} onClick={() => setType('forgot')}>
-              Forgot password?
-            </Anchor>
+          <form onSubmit={form.onSubmit((values) => handleLogin(values))}>
+            <TextInput label="Email" type="email" placeholder="email@orbium.xyz" required {...form.getInputProps("email")} />
+            <PasswordInput label="Password" placeholder="Your password" required mt="md" {...form.getInputProps("password")}/>
+            <Group position="apart" mt="md">
+              <Anchor size="sm" className={classes.linkText} onClick={() => setType('forgot')}>
+                Forgot password?
+              </Anchor>
 
-            <Anchor size="sm" className={classes.linkText} onClick={() => setType('request')}>
-              Request email verification
-            </Anchor>
-          </Group>
-          <Button fullWidth mt="xl" className={classes.button}>
-            Sign in
-          </Button>
+              <Anchor size="sm" className={classes.linkText} onClick={() => setType('request')}>
+                Request email verification
+              </Anchor>
+            </Group>
+            <Button fullWidth mt="xl" className={classes.button} type="submit">
+              Sign in
+            </Button>
+          </form>
         </Paper>
       </Container>
     </div>
   )
+}
+
+export const doLogin = async (request: any, body: any) => {
+  const session = await getSession(request.headers.get('Cookie'));
+  const jwt = body.get('jwt');
+  const userId = body.get('userId');
+
+  session.set('userId', userId);
+  session.set('jwt', jwt);
+
+  return redirect('/dashboard/', {
+    headers: {
+      'Set-Cookie': await commitSession(session)
+    }
+  })
 }
 
 export default LoginUser;

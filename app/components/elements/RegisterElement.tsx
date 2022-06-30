@@ -94,8 +94,7 @@ const RegisterUser = ({
 	setType: Function;
 }) => {
 	const { classes } = useStyles();
-  const actionData = useActionData();
-  console.log(actionData)
+  // const actionData = useActionData();
 
 	const form = useForm({
 		schema: zodResolver(registerSchema),
