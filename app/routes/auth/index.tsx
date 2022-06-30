@@ -1,6 +1,7 @@
 import { Transition } from "@mantine/core";
-import { LoaderFunction, MetaFunction, redirect } from "@remix-run/node";
-import { useLoaderData, useLocation, useNavigate } from "@remix-run/react";
+import type { LoaderFunction, MetaFunction} from "@remix-run/node";
+import { redirect } from "@remix-run/node";
+import { useLoaderData, useNavigate } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
 import Logo from "../../media/logo.png";
