@@ -7,7 +7,8 @@ import {
 	TextInput,
 	Title,
 } from "@mantine/core";
-import { ActionFunction, json } from "@remix-run/node";
+import type { ActionFunction} from "@remix-run/node";
+import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useState } from "react";
 import { sendgridClient } from "~/sendmail.server";
