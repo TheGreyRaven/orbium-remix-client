@@ -9,13 +9,13 @@ const { getSession, commitSession, destroySession } =
       name: "__session",
 
       // all of these are optional
-      domain: "localhost",
+      // domain: "dev.orbium.xyz",
       expires: new Date(Date.now() + 15_000),
       httpOnly: true,
       maxAge: 60,
       path: "/",
       sameSite: "lax",
-      secrets: ["s3cret1"],
+      secrets: ["jesartohkjioesdjrthiojersiojhio0edrtjobn"],
       secure: true
     }
   });

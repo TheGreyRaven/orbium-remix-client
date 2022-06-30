@@ -125,7 +125,7 @@ const LoginUser = ({ transitionStyle, setType }: { transitionStyle: CSSPropertie
   )
 }
 
-export const doLogin = async (request: any, body: any) => {
+export const doLogin = async (request: any, body: FormData) => {
   const session = await getSession(request.headers.get('Cookie'));
   const jwt = body.get('jwt');
   const userId = body.get('userId');
