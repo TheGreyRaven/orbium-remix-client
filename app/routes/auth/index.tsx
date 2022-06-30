@@ -1,6 +1,7 @@
 import { Transition } from "@mantine/core";
-import type { MetaFunction } from "@remix-run/node";
-import { useState } from "react";
+import { LoaderFunction, MetaFunction, redirect } from "@remix-run/node";
+import { useLoaderData, useLocation, useNavigate } from "@remix-run/react";
+import { useEffect, useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
 import Logo from "../../media/logo.png";
 
@@ -17,8 +18,36 @@ export const meta: MetaFunction = () => ({
   'og:description': 'Create, login or request a new password for your account.'
 });
 
+const availableTypes = [
+  'login',
+  'register',
+  'forgot',
+  'request'
+]
+
+export const loader: LoaderFunction = async ({
+  request,
+}) => {
+  const url = new URL(request.url);
+  const type = url.searchParams.get("type") ?? undefined;
+
+  if (!type || !availableTypes.includes(type)) {
+    return redirect('/auth?type=login')
+  }
+
+  return type
+};
+
 const Index = () => {
-  const [type, setType] = useState<string>('login');
+  const authType = useLoaderData();
+  const navigate = useNavigate();
+  const [type, setType] = useState<string>(authType);
+
+  useEffect(() => {
+    if (authType !== type) {
+      navigate(`/auth?type=${type}`)
+    }
+  }, [authType, navigate, type])
 
   return (
     <>

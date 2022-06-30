@@ -94,7 +94,7 @@ const Index = () => {
         </List>
         <TextAnchor text='See full list of' linkText='features' to='/features/' />
 
-        <Button mt={12} size='xl' className={classes.startButton} component={Link} to='/authenticate/'>GET STARTED</Button>
+        <Button mt={12} size='xl' className={classes.startButton} component={Link} to='/auth/'>GET STARTED</Button>
         <TextAnchor text='By joining, you agree with our' linkText='Terms of Service' to='/tos/' />
       </Group>
     </Container>
