@@ -1,4 +1,4 @@
-import { Anchor, Button, Container, createStyles, Paper, PasswordInput, Text, TextInput, Title } from "@mantine/core";
+import { Anchor, Button, Checkbox, Container, createStyles, Paper, PasswordInput, Text, TextInput, Title } from "@mantine/core";
 import type { MetaFunction } from "@remix-run/node";
 import type { CSSProperties } from "react";
 
@@ -44,8 +44,12 @@ const useStyles = createStyles((theme) => ({
 	},
   paperBackground: {
     backgroundColor: '#101010'
-  }
+  },
 }))
+
+const checkbox = {
+  input: { "&:checked": { backgroundColor: "#F09821", borderColor: "#F09821" } }
+} as const
 
 const RegisterUser = ({ transitionStyle, setType }: { transitionStyle: CSSProperties, setType: Function }) => {
   const { classes } = useStyles();
@@ -70,6 +74,7 @@ const RegisterUser = ({ transitionStyle, setType }: { transitionStyle: CSSProper
           <TextInput label="Email" type="email" placeholder="user@orbium.xyz" required mt="md" />
           <PasswordInput label="Password" placeholder="Your password" required mt="md" />
           <PasswordInput label="Confirm password" placeholder="Your password" required mt="md" />
+          <Checkbox label="Receive newsletter" defaultChecked mt="md" styles={checkbox} />
           <Button fullWidth mt="xl" className={classes.button}>
             Create account
           </Button>
