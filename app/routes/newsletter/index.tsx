@@ -7,7 +7,7 @@ import {
 	TextInput,
 	Title,
 } from "@mantine/core";
-import type { ActionFunction} from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { useState } from "react";
@@ -31,6 +31,9 @@ const useStyles = createStyles((theme) => ({
 			backgroundColor: "#c27c1c",
 		},
 	},
+	paperBackground: {
+		backgroundColor: "#101010",
+	},
 }));
 
 const ThankYou = () => {
@@ -46,15 +49,17 @@ const ThankYou = () => {
 				p={30}
 				mt={30}
 				radius="md"
-				sx={{ backgroundColor: "#101010" }}
+				className={classes.paperBackground}
 			>
 				<Text color="dimmed" size="sm" align="center" mt={5}>
-					We will hopefully soon start letting people in to our service, keep an eye out on your inbox and perhaps you will soon get a early access invite!
+					We will hopefully soon start letting people in to our
+					service, keep an eye out on your inbox and perhaps you will
+					soon get a early access invite!
 				</Text>
 			</Paper>
 		</>
-	)
-}
+	);
+};
 
 const Index = () => {
 	const { classes } = useStyles();
@@ -71,10 +76,10 @@ const Index = () => {
 						Join our newsletter
 					</Title>
 					<Text color="dimmed" size="sm" align="center" mt={5}>
-						By joining our newsletter you can stay up to date with the
-						development of Orbium, have a chance at getting early access
-						to our service, early access to our SDK & API documentation
-						and a lot more.
+						By joining our newsletter you can stay up to date with
+						the development of Orbium, have a chance at getting
+						early access to our service, early access to our SDK &
+						API documentation and a lot more.
 					</Text>
 					<Paper
 						withBorder
@@ -144,6 +149,6 @@ export const action: ActionFunction = async ({ request }) => {
 			error: err.response.body.errors[0]?.message,
 		});
 	}
-}
+};
 
 export default Index;
