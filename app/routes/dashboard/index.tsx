@@ -1,6 +1,7 @@
 import { Button, Container, createStyles, Paper, Text, Title } from "@mantine/core";
 import type { LoaderFunction} from "@remix-run/node";
 import { json } from "@remix-run/node";
+import { useNavigate } from "@remix-run/react";
 import { SDK } from "~/appwrite";
 import { checkSession } from "~/session";
 
@@ -31,9 +32,11 @@ const useStyles = createStyles((theme) => ({
 
 const Dashboard = () => {
   const { classes } = useStyles();
+  const navigate = useNavigate();
 
   const logoutUser = async () => {
     await SDK.account.deleteSession('current');
+    navigate('/auth');
   }
 
   return (
