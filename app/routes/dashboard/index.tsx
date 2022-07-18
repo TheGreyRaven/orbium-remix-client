@@ -15,8 +15,12 @@ export const loader: LoaderFunction = async ({ request }) => {
 export const action: ActionFunction = async ({ request }) => {
   console.log("asdasdasda")
   const session = await getSession(request.headers.get('Cookie'));
-  await destroySession(session)
-  return redirect('/auth')
+  console.log({ session })
+  return redirect('/auth', {
+    headers: {
+      "Set-Cookie": await destroySession(session),
+    },
+  })
 }
 
 const useStyles = createStyles((theme) => ({
