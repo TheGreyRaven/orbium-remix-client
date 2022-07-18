@@ -1,15 +1,23 @@
 import { Button, Container, createStyles, Paper, Text, Title } from "@mantine/core";
-import type { LoaderFunction} from "@remix-run/node";
+import type { ActionFunction, LoaderFunction} from "@remix-run/node";
+import { redirect} from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useNavigate } from "@remix-run/react";
+import { useSubmit } from "@remix-run/react";
 import { SDK } from "~/appwrite";
-import { checkSession } from "~/session";
+import { checkSession, destroySession, getSession } from "~/session";
 
 export const loader: LoaderFunction = async ({ request }) => {
   await checkSession(request);
 
   return json({ auth: true });
 };
+
+export const action: ActionFunction = async ({ request }) => {
+  console.log("asdasdasda")
+  const session = await getSession(request.headers.get('Cookie'));
+  await destroySession(session)
+  return redirect('/auth')
+}
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -32,11 +40,11 @@ const useStyles = createStyles((theme) => ({
 
 const Dashboard = () => {
   const { classes } = useStyles();
-  const navigate = useNavigate();
+  const submit = useSubmit();
 
   const logoutUser = async () => {
     await SDK.account.deleteSession('current');
-    navigate('/auth');
+    submit(null, { method: "post" });
   }
 
   return (
