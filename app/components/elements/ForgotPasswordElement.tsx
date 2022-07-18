@@ -2,7 +2,8 @@ import { Anchor, Box, Button, Center, Container, createStyles, Group, Paper, Tex
 import { useForm, zodResolver } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import type { MetaFunction } from "@remix-run/node";
-import { CSSProperties, useState } from "react";
+import type { CSSProperties} from "react";
+import { useState } from "react";
 import { ArrowLeft } from "tabler-icons-react";
 import { z } from "zod";
 import { SDK } from "~/appwrite";
