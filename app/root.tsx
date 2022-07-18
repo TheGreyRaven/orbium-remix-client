@@ -8,6 +8,7 @@ import {
 } from "@remix-run/react";
 import { MantineProvider } from "@mantine/core";
 import { Layout } from "./components";
+import { NotificationsProvider } from "@mantine/notifications";
 
 const App = () => {
 	return (
@@ -38,12 +39,14 @@ const App = () => {
 					<Links />
 				</head>
 				<body>
-					<Layout>
-						<Outlet />
-					</Layout>
-					<ScrollRestoration />
-					<Scripts />
-					<LiveReload />
+					<NotificationsProvider position="top-center">
+						<Layout>
+							<Outlet />
+						</Layout>
+						<ScrollRestoration />
+						<Scripts />
+						<LiveReload />
+					</NotificationsProvider>
 				</body>
 			</html>
 		</MantineProvider>

@@ -4,6 +4,7 @@ import {
 	Checkbox,
 	Container,
 	createStyles,
+	LoadingOverlay,
 	Paper,
 	PasswordInput,
 	Text,
@@ -12,9 +13,10 @@ import {
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import type { MetaFunction } from "@remix-run/node";
-import { Form } from "@remix-run/react";
-import type { CSSProperties } from "react";
+import type { CSSProperties} from "react";
+import { useState } from "react";
 import { z } from "zod";
+import { SDK } from "~/appwrite";
 
 export const meta: MetaFunction = () => ({
 	charset: "utf-8",
@@ -94,7 +96,7 @@ const RegisterUser = ({
 	setType: Function;
 }) => {
 	const { classes } = useStyles();
-  // const actionData = useActionData();
+  const [isLoading, setIsLoading] = useState(false);
 
 	const form = useForm({
 		schema: zodResolver(registerSchema),
@@ -107,6 +109,25 @@ const RegisterUser = ({
 			newsLetter: true,
 		},
 	});
+
+	const registerUser = async (values: any) => {
+		setIsLoading(true);
+		try {
+			await SDK.account.create(
+				"unique()",
+				values.email,
+				values.password,
+				values.username
+			);
+
+			await SDK.account.createSession(values.email, values.password);
+
+			await SDK.account.createVerification('https://orbium.xyz/verify-email')
+		} catch (err: any) {
+			console.log(err.toString());
+		}
+		setIsLoading(false)
+	}
 
 	return (
 		<div style={transitionStyle}>
@@ -133,7 +154,8 @@ const RegisterUser = ({
 					radius="md"
 					className={classes.paperBackground}
 				>
-          <Form method="post">
+					<LoadingOverlay visible={isLoading} />
+          <form onSubmit={form.onSubmit((values) => registerUser(values))}>
             <TextInput name="type" defaultValue="register" hidden />
             <TextInput
               label="Username"
@@ -177,7 +199,7 @@ const RegisterUser = ({
             <Button fullWidth mt="xl" className={classes.button} type="submit">
               Create account
             </Button>
-          </Form>
+          </form>
 				</Paper>
 			</Container>
 		</div>
