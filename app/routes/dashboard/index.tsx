@@ -113,7 +113,7 @@ const Dashboard = () => {
 					[Query.equal("user_id", user.$id)]
 				);
 
-				const result = license.documents.pop();
+				const result = license.documents.pop() ?? false;
         // @ts-expect-error
 				if (result?.licensed) {
 					setLicensed(true);
@@ -123,7 +123,6 @@ const Dashboard = () => {
       }
 		})();
 	}, []);
-
 
   return (
     <Container my={40} className={classes.container}>
@@ -137,7 +136,7 @@ const Dashboard = () => {
       Thank you for signing up to Orbium, currently we can't show you the dashboard yet but we are very close! 😉
     </Text>
     <Paper withBorder shadow="md" p="xl" mt={30} radius="md" sx={{ backgroundColor: '#101010' }}>
-      {licensed ? (
+      {!licensed ? (
       <>
         <Text mb="md" align="center">Upgrade to a premium license and gain access to all features we offer and premium support for a reduced one time payment of only 4.99€!</Text>
         <PayPalScriptProvider
