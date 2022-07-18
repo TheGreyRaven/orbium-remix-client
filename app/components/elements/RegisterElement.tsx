@@ -12,6 +12,7 @@ import {
 	Title,
 } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
+import { showNotification } from "@mantine/notifications";
 import type { MetaFunction } from "@remix-run/node";
 import type { CSSProperties} from "react";
 import { useState } from "react";
@@ -123,8 +124,18 @@ const RegisterUser = ({
 			await SDK.account.createSession(values.email, values.password);
 
 			await SDK.account.createVerification('https://orbium.xyz/verify-email')
+			showNotification({
+				title: "Success",
+				message: "Your account have been created, please verify your email with the link we have sent to you!",
+				color: "green"
+			})
 		} catch (err: any) {
 			console.log(err.toString());
+			showNotification({
+				title: "Something went wrong",
+				message: "Please try again later or contact our support!",
+				color: "red"
+			})
 		}
 		setIsLoading(false)
 	}
