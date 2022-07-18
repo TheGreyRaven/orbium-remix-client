@@ -118,8 +118,8 @@ const Dashboard = () => {
 				if (result?.licensed) {
 					setLicensed(true);
 				}
-			} catch (_err: any) {
-        console.log(_err.toString());
+			} catch (err: any) {
+        console.log(err.toString());
       }
 		})();
 	}, []);

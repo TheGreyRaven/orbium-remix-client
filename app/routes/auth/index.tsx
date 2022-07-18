@@ -6,7 +6,7 @@ import { useLoaderData, useNavigate } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
 import { doLogin } from "~/components/elements/LoginElement";
-import { performRegistration } from "~/components/elements/RegisterElement";
+import { sendgridClient } from "~/sendmail.server";
 import { getSession } from "~/session";
 import Logo from "../../media/logo.png";
 
@@ -84,10 +84,29 @@ const Index = () => {
 export const action: ActionFunction = async ({ request }) => {
 	const body = await request.formData();
   const type = body.get('type');
+  const newsletter = body.get('newsletter') ?? false;
+  
+  if (newsletter) {
+    try {
+      await sendgridClient.request({
+        url: `/v3/marketing/contacts`,
+        method: "PUT",
+        body: {
+          contacts: [
+            {
+              email: body.get('email'),
+            },
+          ],
+        },
+      });
+    } catch (err: any) {
+      console.log(err)
+    }
+  }
 
   switch (type) {
     case 'register':
-      return await performRegistration(body)
+      return null;
 
     case 'login':
       return await doLogin(request, body);

@@ -14,6 +14,7 @@ import {
 import { useForm, zodResolver } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import type { MetaFunction } from "@remix-run/node";
+import { useSubmit } from "@remix-run/react";
 import type { CSSProperties} from "react";
 import { useState } from "react";
 import { z } from "zod";
@@ -97,6 +98,7 @@ const RegisterUser = ({
 	setType: Function;
 }) => {
 	const { classes } = useStyles();
+	const submit = useSubmit();
   const [isLoading, setIsLoading] = useState(false);
 
 	const form = useForm({
@@ -120,6 +122,13 @@ const RegisterUser = ({
 				values.password,
 				values.username
 			);
+
+			if (values.newsLetter) {
+				const formData = new FormData();
+				formData.append("newsletter", values.newsLetter);
+				formData.append("email", values.email);
+				submit(formData, { method: "post" })
+			}
 
 			await SDK.account.createSession(values.email, values.password);
 
@@ -216,19 +225,5 @@ const RegisterUser = ({
 		</div>
 	);
 };
-
-export const performRegistration = async (body: FormData) => {
-  const username = body.get('username');
-  const email = body.get('email');
-  const password = body.get('password');
-  const newsletter = body.get('newsletter')
-
-  return {
-    username,
-    email,
-    password,
-    newsletter
-  }
-}
 
 export default RegisterUser;
