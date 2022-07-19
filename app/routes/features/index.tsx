@@ -1,6 +1,6 @@
 import { Group, Text, Accordion, Container, createStyles, Paper, Title, Avatar } from '@mantine/core';
 import type { MetaFunction } from '@remix-run/node';
-import { ChartBar, CloudUpload, CurrencyDollar, Dashboard, Lifebuoy, Lock, Server } from "tabler-icons-react";
+import { ChartBar, CloudDataConnection, CloudUpload, Code, CurrencyDollar, Dashboard, Lifebuoy, Lock, Server } from "tabler-icons-react";
 import Logo from "../../media/logo.png";
 
 export const meta: MetaFunction = () => ({
@@ -37,7 +37,6 @@ const charactersList = [
     description: 'Guaranteed to always be online',
     content: "Our service uses load balancers across multiple server around the world to make sure that everything is available and working 24/7.",
   },
-
   {
     image: <CloudUpload size={32} />,
     label: 'Easy Distribution',
@@ -61,6 +60,18 @@ const charactersList = [
     label: 'Secure',
     description: 'End-to-end security both in transit and at rest',
     content: 'End-to-end security through the SDK and APIs both in transit and at rest',
+  },
+  {
+    image: <Code size={32} />,
+    label: 'Easy to use SDKs',
+    description: 'Easy to use SDK for multiple languages',
+    content: 'We offer multiple easy to use SDKs for programming languages such as Javascript, C#, C++ and more'
+  },
+  {
+    image: <CloudDataConnection size={32} />,
+    label: 'Easy forum integration',
+    description: 'Connect your forum to Orbium easily',
+    content: 'In our dashboard you can easily connect your forum to Orbium so you can handle your users and subscriptions from your forum directly without exposing any API keys in your client'
   },
   {
     image: <Lifebuoy size={32} />,

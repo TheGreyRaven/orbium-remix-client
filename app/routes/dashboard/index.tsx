@@ -1,5 +1,5 @@
 import { Button, Container, createStyles, Paper, Text, Title } from "@mantine/core";
-import type { ActionFunction, LoaderFunction} from "@remix-run/node";
+import type { ActionFunction, LoaderFunction, MetaFunction} from "@remix-run/node";
 import { redirect} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useSubmit } from "@remix-run/react";
@@ -7,6 +7,16 @@ import { Query, SDK } from "~/appwrite";
 import { checkSession, destroySession, getSession } from "~/utils/session";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useEffect, useState } from "react";
+
+export const meta: MetaFunction = () => ({
+	charset: "utf-8",
+	title: "Orbium - Dashboard",
+	description: "Control and manage your softwares from our dashboard.",
+	keywords: "Orbium, licensing, hwid, cheap, cloud-hosted, features",
+	robots: "index, follow",
+	language: "English",
+	viewport: "width=device-width,initial-scale=1",
+});
 
 export const loader: LoaderFunction = async ({ request }) => {
   await checkSession(request);
