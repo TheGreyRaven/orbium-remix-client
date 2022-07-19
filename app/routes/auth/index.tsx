@@ -4,7 +4,7 @@ import { json} from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { useLoaderData, useNavigate } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
+import { ForgotPassword, LoginUser, RegisterUser } from "~/components/elements";
 import { doLogin } from "~/components/elements/LoginElement";
 import { sendgridClient } from "~/utils/sendmail.server";
 import { getSession } from "~/utils/session";
@@ -73,10 +73,6 @@ const Index = () => {
       <Transition mounted={type === 'forgot'} transition="fade" duration={400} timingFunction="ease">
         { (styles) => <ForgotPassword transitionStyle={styles} setType={setType} /> }
       </Transition>
-
-      <Transition mounted={type === 'request'} transition="fade" duration={400} timingFunction="ease">
-        { (styles) => <NewEmailVerification transitionStyle={styles} setType={setType} /> }
-      </Transition>
     </>
   )
 }
@@ -113,9 +109,6 @@ export const action: ActionFunction = async ({ request }) => {
 
     case 'forgot':
       return null
-
-    case 'request':
-      return null;
 
     default:
       return json({

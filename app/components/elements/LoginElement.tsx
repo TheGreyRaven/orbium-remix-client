@@ -6,7 +6,7 @@ import { useFetcher } from "@remix-run/react";
 import type { CSSProperties } from "react";
 import { z } from "zod";
 import { SDK } from "~/appwrite";
-import { commitSession, getSession } from "~/session";
+import { commitSession, getSession } from "~/utils/session";
 
 export const meta: MetaFunction = () => ({
 	charset: "utf-8",
@@ -109,10 +109,6 @@ const LoginUser = ({ transitionStyle, setType }: { transitionStyle: CSSPropertie
             <Group position="apart" mt="md">
               <Anchor size="sm" className={classes.linkText} onClick={() => setType('forgot')}>
                 Forgot password?
-              </Anchor>
-
-              <Anchor size="sm" className={classes.linkText} onClick={() => setType('request')}>
-                Request email verification
               </Anchor>
             </Group>
             <Button fullWidth mt="xl" className={classes.button} type="submit">
