@@ -6,8 +6,8 @@ import { useLoaderData, useNavigate } from "@remix-run/react";
 import { useEffect, useState } from "react";
 import { ForgotPassword, LoginUser, NewEmailVerification, RegisterUser } from "~/components/elements";
 import { doLogin } from "~/components/elements/LoginElement";
-import { sendgridClient } from "~/sendmail.server";
-import { getSession } from "~/session";
+import { sendgridClient } from "~/utils/sendmail.server";
+import { getSession } from "~/utils/session";
 import Logo from "../../media/logo.png";
 
 export const meta: MetaFunction = () => ({

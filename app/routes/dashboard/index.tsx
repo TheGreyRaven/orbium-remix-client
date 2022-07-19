@@ -4,7 +4,7 @@ import { redirect} from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useSubmit } from "@remix-run/react";
 import { Query, SDK } from "~/appwrite";
-import { checkSession, destroySession, getSession } from "~/session";
+import { checkSession, destroySession, getSession } from "~/utils/session";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useEffect, useState } from "react";
 
