@@ -51,7 +51,7 @@ const useStyles = createStyles((theme) => ({
   },
 }))
 
-const ResendEmail = ({ user }: { user: Models.User<Models.Preferences>}) => {
+const ResendEmail = ({ user }: { user?: Models.User<Models.Preferences>}) => {
   const { classes } = useStyles();
 
   const [disabled, setDisabled] = useState(false);

@@ -34,7 +34,7 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 const Dashboard = () => {
-  const [user, setUser] = useState<any>({});
+  const [user, setUser] = useState<Models.User<Models.Preferences>>();
 
   useEffect(() => {
     SDK.account.get().then((res) => {
@@ -46,7 +46,7 @@ const Dashboard = () => {
 
   return (
     <>
-      {!user.emailVerification ? (
+      {!user?.emailVerification ? (
         <ResendEmail user={user} />
       ) : (
         <PurchaseLicense/>
