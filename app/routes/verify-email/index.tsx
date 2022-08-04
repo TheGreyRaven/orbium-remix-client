@@ -113,7 +113,7 @@ const VerifyEmail = () => {
 
         <Stack mt="xl">
           { success ? (
-            <Button className={classes.startButton} fullWidth component={Link} to="/dashboard/">
+            <Button className={classes.startButton} fullWidth component={Link} to="/dashboard/" rel="canonical">
               Go to dashboard
             </Button>
           ) : [

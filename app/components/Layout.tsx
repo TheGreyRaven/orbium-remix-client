@@ -41,9 +41,9 @@ const Layout = ({ children }: { children: JSX.Element }) => {
       {!path.includes('/dashboard') && (
         <Header height={56} sx={{ borderBottom: 0 }} >
           <Container className={classes.inner}>
-            <Anchor component={Link} to="/" className={classes.link}>
+            <Anchor component={Link} to="/" className={classes.link} rel="canonical">
               <Group>
-                <Image src={Logo} height={48} />
+                <Image src={Logo} height={48} alt="Website logo" />
                 <Text weight={700} size="xl">Orbium</Text>
               </Group>
             </Anchor>

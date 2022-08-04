@@ -161,7 +161,7 @@ const VerifyEmail = () => {
           )}
           
           {(!success || isSuccess) && (
-            <Button className={classes.startButton} fullWidth component={Link} to="/dashboard/">
+            <Button className={classes.startButton} fullWidth component={Link} to="/dashboard/" rel="canonical">
               Go to dashboard
             </Button>
           )}
