@@ -90,7 +90,8 @@ const Index = () => {
           <List.Item>Monitor everything from online customers, logins and more.</List.Item>
           <List.Item>End-to-end security through the SDK and APIs both in transit and at rest.</List.Item>
           <List.Item>Easily upload and store files required by your software.</List.Item>
-          <List.Item>Write and publish news in realtime to your clients.</List.Item>
+          <List.Item>Authenticate your customers using your XenForo, IPS, MyBB forum.</List.Item>
+          <List.Item>Write and publish news to your clients.</List.Item>
         </List>
         <TextAnchor text='See full list of' linkText='features' to='/features/' />
 

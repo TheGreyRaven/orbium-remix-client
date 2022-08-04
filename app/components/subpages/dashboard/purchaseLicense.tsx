@@ -78,7 +78,7 @@ const PurchaseLicense = () => {
 			(async() => {
         const user = await SDK.account.get();
 				await SDK.database.createDocument("62aa04a42eb3985280f9", "unique()", {
-					user_id: user?.$id,
+					user_id: user.$id,
 					licensed: success
 				})
 			})();
