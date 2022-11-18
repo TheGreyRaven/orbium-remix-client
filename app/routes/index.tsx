@@ -1,4 +1,4 @@
-import { createStyles, Group, Container, Text, List, ThemeIcon, Button } from '@mantine/core';
+import { createStyles, Group, Container, Text, List, ThemeIcon, Button, Anchor } from '@mantine/core';
 import { Link } from '@remix-run/react';
 import { Check } from 'tabler-icons-react';
 import { TextLoop } from "react-text-loop-next";
@@ -75,14 +75,15 @@ const Index = () => {
   return (
     <Container className={classes.outer}>
       <Group direction='column' sx={{ minWidth: '100%' }}>
-        <Text className={classes.landingText}>A better way to</Text>
-        <TextLoop>
+        <Text className={classes.landingText}>Hey there!</Text>
+        {/* <TextLoop>
           {SWITCHABLE_TEXT.map((text, index) => (
             <Text key={index} className={classes.landingText}>{text}</Text>
           ))}
-        </TextLoop>
-        <Text className={classes.landingText}>using <span style={{ color: "#F09821" }}>Orbium</span></Text>
-        <List spacing="sm" pt={12} icon={
+        </TextLoop> */}
+        <Text className={classes.landingText}>We are currently</Text>
+        <Text className={classes.landingText}>rebuilding <span style={{ color: "#F09821" }}>Orbium</span></Text>
+        {/* <List spacing="sm" pt={12} icon={
           <ThemeIcon size={24} radius="xl" sx={{ backgroundColor: "#F09821" }}>
             <Check size={16} />
           </ThemeIcon>
@@ -92,9 +93,9 @@ const Index = () => {
           <List.Item>Easily upload and store files required by your software.</List.Item>
           <List.Item>Authenticate your customers using your XenForo, IPS, MyBB forum.</List.Item>
           <List.Item>Write and publish news to your clients.</List.Item>
-        </List>
-        <TextAnchor text='See full list of' linkText='features' to='/features/' />
-        <Button mt={12} size='xl' className={classes.startButton} component={Link} to='/auth/'>GET STARTED</Button>
+        </List> */}
+        <TextAnchor text='See all our' linkText='features' to='/features/' />
+        <Button mt={12} size='xl' className={classes.startButton} component="a" href='https://discord.gg/6fGthxY594' target="_blank">JOIN DISCORD</Button>
         <TextAnchor text='By joining, you agree with our' linkText='Terms of Service' to='/tos/' />
       </Group>
     </Container>
